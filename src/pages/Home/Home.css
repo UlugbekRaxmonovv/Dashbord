@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Sedan:ital@0;1&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+*{
+    font-family: "Montserrat", sans-serif;
+}
+
+.container{
+    max-width: 1340px;
+    margin:0 auto;
+    width: 100%;
+}
+
+.home_i{
+
+   display: flex;
+   justify-content: center;
+   align-items: center; 
+   gap: 20px;
+   padding: 10px 0;
+}
+.home_i_lif{
+    max-width: 255px;
+    width: 100%;
+    height: 157px;
+    border-radius: 8px;
+    background: #F0F9FF;
+    transition: all .1s linear;
+}
+.home_i_lif:hover{
+    background: linear-gradient(110.42deg, #FEAF00 18.27%, #F8D442 91.84%);
+    transform: scale(1.02);
+    color: white;
+
+}
+.home_i_lif:nth-child(2){
+    background: #FEF6FB;
+    transition: all 0.1s linear;
+}
+.home_i_lif:nth-child(2):hover{
+    background: linear-gradient(110.42deg, #FEAF00 18.27%, #F8D442 91.84%);
+    transform: scale(1.02);
+    color: white;
+}
+.home_i_lif:nth-child(3):hover {
+    background: linear-gradient(110.42deg, #FEAF00 18.27%, #F8D442 91.84%);
+    transform: scale(1.02);
+    color: white;
+}
+.home_i_lif:nth-child(3){
+    background: #FEFBEC;
+    transition: all 0.1s linear;
+
+}
+.home_i_lif:nth-child(3){
+    background: #FEF6FB;
+
+}
+.home_i_lif >svg{
+font-size: 40px;
+margin: 10px 20px;
+}
+
+.home_i_lif >h1{
+    font-family: Montserrat;
+font-size: 14px;
+font-weight: 500;
+line-height: 17.07px;
+text-align: left;
+color: #6C6C6C;
+padding: 0 20px;
+
+}
+.home_i_lif .Link{
+    padding: 4px 16px;
+    text-decoration: none;
+    background-color: rgb(0, 255, 136);
+    border-radius: 8px;
+    margin-left:  75%;
+    font-family: Montserrat;
+font-size: 20px;
+font-weight: 700;
+line-height: 36.57px;
+text-align: left;
+color: #000000;
+
+}

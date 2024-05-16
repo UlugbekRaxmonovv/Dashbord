@@ -1,0 +1,32 @@
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Hotels from './pages/Hotels/Hotels.jsx';
+import Users from './pages/Users/Users.jsx';
+import Restaurant from './pages/Restaurants/Restaurants.jsx';
+import Attractions from './pages/Attractions/Attractions.jsx';
+import Admins from './pages/Admins/Admins.jsx';
+import Settings from './pages/Settings/Settings.jsx';
+import Home from './pages/Home/Home.jsx'; 
+import Login from './pages/Login/Login.jsx';
+import Auth from './pages/Auth/Auth.jsx';
+function App() {
+  return (
+    <>
+    
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path="/" element={<Auth />}> 
+          <Route path="home" element={<Home />}/>
+          <Route path="users" element={<Users />}/>
+          <Route path="hotels" element={<Hotels />} />
+          <Route path="restaurants" element={<Restaurant />} />
+          <Route path="attractions" element={<Attractions />} />
+          <Route path="admins" element={<Admins />} />
+          <Route path="settings" element={<Settings />} />
+          </Route>
+        </Routes>
+    </>
+  );
+}
+
+export default App;

@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Sedan:ital@0;1&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+*{
+    font-family: "Montserrat", sans-serif;
+}
+.logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-left: -30px; */
+}
+.logo_img >img{
+    max-width: 141px;
+    width: 100%;
+    border-radius: 50%;
+    max-height: 140px; 
+}
+.logo_img >h1{
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20.72px;
+    text-align: left;
+    color: #000000;
+    max-width: 130px;
+    max-height: 21px;
+    width: 100%;
+ 
+    
+}
+.logo_img >p{
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17.07px;
+    color: #FEAF00;
+    text-align: center;
+    margin-top: 20px;
+    
+}

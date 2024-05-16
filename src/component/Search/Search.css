@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&family=Sedan:ital@0;1&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+*{
+    font-family: "Montserrat", sans-serif;
+}
+.search{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    align-items: self-start;
+    margin-top: -10px;
+
+}
+.search_alt{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 412px;
+    gap: 40px;
+    width: 100%;
+    height: 37px;
+}
+.search_alt_row{
+    display: flex;
+    align-items: center;
+}
+.search_alt input{
+    max-width: 412px;
+    width: 100%;
+    height: 37px;
+    border-radius: 8px;
+    border: 1px;
+    border: 1px solid #E5E5E5;
+    outline: none;
+    padding: 0 10px;
+    
+}
+.search_alt_row > svg{
+    margin-left: -20px;
+    font-size: 17px;
+    color: #C4C4C4;
+
+}
+::placeholder{
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17.07px;
+    text-align: left;
+    color: #C4C4C4;
+    
+}
