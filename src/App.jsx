@@ -9,6 +9,7 @@ import Settings from './pages/Settings/Settings.jsx';
 import Home from './pages/Home/Home.jsx'; 
 import Login from './pages/Login/Login.jsx';
 import Auth from './pages/Auth/Auth.jsx';
+import DeletUser from './pages/DeletUser/DeletUser.jsx';
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
           <Route path="attractions" element={<Attractions />} />
           <Route path="admins" element={<Admins />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="deletUser" element={<DeletUser />} />
           </Route>
         </Routes>
     </>

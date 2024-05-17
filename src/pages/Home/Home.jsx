@@ -18,6 +18,7 @@ const Home = () => {
     const [state, setState] = useState([]); 
     const [number,setNumber] = useState([]);
     const [user,setUser] = useState([]);
+    const [attraction,setAttraction] = useState([]);
     useEffect(() => {
         axios
             .get('/restaurant/list?page=10&limit=1')
@@ -45,6 +46,18 @@ const Home = () => {
         })
 
     },[])
+
+
+    useEffect(() =>{
+        axios
+        .get('/users/list?limit=5&page=1&column=role&value=user')
+        .then((res) =>{
+            setAttraction(res.data.count);
+        })
+        .catch((err) => console.log(">>>>>>",err))
+
+    },[])
+
     return (
         <div className='container'>
             <Box sx={{ display: 'flex' }}>
@@ -71,7 +84,7 @@ const Home = () => {
                      <div className="home_i_lif">
                      <FaUser/>
                      <h1>Users</h1>
-                    <Link className='Link' to={'/users'}>{state}</Link>
+                    <Link className='Link' to={'/users'}>{attraction}</Link>
                      </div>
                 </div>
 

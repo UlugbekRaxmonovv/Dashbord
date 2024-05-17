@@ -21,6 +21,8 @@ import { useNavigate } from 'react-router-dom';
 import { TbMenuDeep } from "react-icons/tb";
 import logo from '../../assets/img/logo.png'
 import './Saidbar.css'
+import axios from '../../api/index'
+import { useState,useEffect } from 'react';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -73,6 +75,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
+  const [admin,setAdmin] = useState([])
+  console.log(admin);
+
+  useEffect(() =>{
+axios
+.get('/users/token')
+.then((response) => setAdmin(response.data))
+
+  },[])
+
+
+
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
@@ -82,21 +97,15 @@ export default function MiniDrawer() {
      <Box sx={{ display: 'flex' }} >
       <CssBaseline />
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={() =>setOpen(!open)}>
-            {theme.direction === 'rtl' || 'logo' ? <TbMenuDeep /> : <TbMenuDeep />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
         <Divider />
           <ListItem 
           className='logo'>
           <div className="logo_img">
-          <img src={logo} alt="" />
+          <img src={admin?.profile_img} alt="" />
             </div>
             <div className="logo_img">
-            <h1>Karthi <br /> Madesh</h1>
-            <p>Admin</p>
+            <h1>{admin?.full_name}</h1>
+            <p>{admin?.role}</p>
             </div>
           </ListItem>
         <List>
@@ -244,6 +253,28 @@ export default function MiniDrawer() {
                 <IoMdSettings style={{fontSize:'30px'}}/>
                 </ListItemIcon>
                 <ListItemText primary="Settings" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+
+
+            <ListItem  disablePadding sx={{ display: 'none' }} onClick={() =>(navigate('/deletUser'))}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                <IoMdSettings style={{fontSize:'30px'}}/>
+                </ListItemIcon>
+                <ListItemText primary="deletUser" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
         </List>
