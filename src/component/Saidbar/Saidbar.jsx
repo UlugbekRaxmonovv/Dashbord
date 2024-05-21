@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { RiLogoutBoxLine } from "react-icons/ri";
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -76,12 +77,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer() {
   const [admin,setAdmin] = useState([])
-  console.log(admin);
-
+  const [loading,setLoading] = useState(false);
   useEffect(() =>{
+    setLoading(true)
 axios
 .get('/users/token')
 .then((response) => setAdmin(response.data))
+.finally(() => setLoading(false))
 
   },[])
 
@@ -98,6 +100,11 @@ axios
       <CssBaseline />
       <Drawer variant="permanent" open={open}>
         <Divider />
+        {
+          loading ?  <div className="loading"></div>
+          :
+          <></>
+        }
           <ListItem 
           className='logo'>
           <div className="logo_img">
@@ -235,7 +242,7 @@ axios
               </ListItemButton>
             </ListItem>
 
-            <ListItem  disablePadding sx={{ display: 'block' }} onClick={() =>(navigate('/settings'))}>
+            <ListItem  disablePadding sx={{ display: 'block' }} onClick={() =>(navigate('/'))}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -250,9 +257,9 @@ axios
                     justifyContent: 'center',
                   }}
                 >
-                <IoMdSettings style={{fontSize:'30px'}}/>
+                <RiLogoutBoxLine style={{fontSize:'30px',marginTop:'300%'}}/>
                 </ListItemIcon>
-                <ListItemText primary="Settings" sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText style={{marginTop:'50%',marginLeft:'-10%'}} primary="Logout" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
 

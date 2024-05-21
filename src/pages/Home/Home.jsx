@@ -23,7 +23,7 @@ const Home = () => {
         axios
             .get('/restaurant/list?page=10&limit=1')
             .then((res) => {
-                setState(res.data.overall);
+                setState(res.data.count);
                 
             })
             .catch((err) => console.log(err));
@@ -33,16 +33,16 @@ const Home = () => {
         axios
         .get('/attraction/list?page=10&limit=1')
         .then((res) =>{
-            setNumber(res.data.overall);
+            setNumber(res.data.count);
         })
 
     },[])
 
     useEffect(() =>{
         axios
-        .get('/hotel/list?page=10&limit=2')
+        .get('/hotel/list?page=1&limit=2')
         .then((res) =>{
-            setUser(res.data.overall);
+            setUser(res.data.count);
         })
 
     },[])

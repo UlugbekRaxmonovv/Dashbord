@@ -40,3 +40,16 @@
 
     
 }
+.loading{
+    width: 100px;
+    border-radius: 50%;
+    height: 110px;  
+    background-color: rgb(206, 206, 206);
+    position: absolute;
+    top: 10px;
+    left: 70px;
+}
+
+
+
+

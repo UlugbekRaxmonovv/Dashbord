@@ -1,8 +1,9 @@
-
 import React from 'react';
 import Saidbar from '../../component/Saidbar/Saidbar'
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Search from '../../component/Search/Search'
+import Attraction from  '../../component/Attraction/Attraction'
+
 
 const Attractions = () => {
     return (
@@ -10,7 +11,8 @@ const Attractions = () => {
             <Box sx={{ display: 'flex' }}>
             <Saidbar/>
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <h1>Attractions</h1>
+          <Search/>
+          <Attraction/>
       </Box>
             </Box>
         

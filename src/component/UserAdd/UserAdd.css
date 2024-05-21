@@ -6,6 +6,7 @@
     background-color: #F8F8F8;
     padding: 0px 20px;
     margin-top: -5px;
+    height: 100vh;
 }
 .UserAdd_i{
     display: flex;
@@ -21,7 +22,7 @@
  }
 
  .UserAdd_u a p {
-    max-width: 144px;
+    max-width: 244px;
     width: 100%;
     height: 41px;
     border-radius: 4px;
@@ -34,9 +35,18 @@ padding:  0 15px;
 display: flex;
 align-items: center;
 justify-content: center;
+color: black;
 
  }
-.UserAdd_u_l >p{
+ .UserAdd_u a{
+    text-decoration: none;
+ }
+ .UserAdd_u a p:active{
+  background-color: rgb(255, 255, 0);
+  transform: scale(1.02);
+ }
+
+.UserAdd_u_l >a p{
 width: 232px;
 height: 41px;
 top: 73px;
@@ -53,6 +63,13 @@ color: #000000;
 display: flex;
 align-items: center;
 justify-content: center;
+}
+.UserAdd_u_l a{
+   text-decoration: none;
+ }
+ .UserAdd_u_l a p:active{
+  background-color: rgb(0, 166, 255);
+  transform: scale(1.02);
  }
  .btn-2{
     display: flex;
@@ -118,11 +135,7 @@ font-weight: 400;
 line-height: 17.07px;
 text-align: left;
 color: #000000;
-
-  
   }
-
-
   .tr{
     display: flex;
     align-items: center;
@@ -144,4 +157,143 @@ color: #000000;
     background-color:  #F8F8F8 !important;
   }
 
+ .modal{
+  display: none;
+  max-width: 400px;
+  width: 100%;
+  padding: 20px 0;
+  box-shadow: 2px 2px 8px 2px gray;
+  border-radius: 8px;
+  overflow: hidden;
+  height:  650px;
+ } 
+.all{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(1px);
+  display: none;
+
+}
+.all.show{
+  display: block;
+}
+
+ .modal.show{
+  display: block;
+  position: fixed ;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20000;
+  background-color: white;
+ }
+ .modal_row >form{
+  max-width: 400px;
+  width: 100%;
+  padding: 20px 0;
+
+ }
+ .modal_row form input{
+  max-width: 300px;
+  width: 100%;
+  margin-left: -21%;
+  height: 30px;
+  outline: none;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 0 5px;
+
+ }
+ .modal_row form label{
+  margin-left: -21%;
+ }
+.modal_row form select{
+  margin-left: -21%;
+  max-width: 300px;
+  width: 100%;
+  height: 30px;
+  outline: none;
+  border-radius: 4px;
+}
+.modal_row form button{
+  margin-left: -21%;
+  max-width: 300px;
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
+  border-radius: 8px;
+  border: 1px solid gray;
+  background-color: orange;
+  font-size: 20px;
+  color:white;
+}
+.btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
   
+}  
+.btn1 button {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid gray;
+  color: black;
+  background-color: orange;
+}
+.btn1 button:disabled{
+  background-color: gray;
+}
+.number{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+.overfly{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #0006;
+  z-index: 10;
+}
+.overly_form{
+  width: 400px;
+  background-color: wheat;
+  height: 600px;
+  position: fixed;
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  padding: 30px;
+}
+.overly_form h2{
+  text-align: center;
+  font-family: Montserrat sans-serif;
+  font-size: 40px;
+}
+.overly_form input,
+.overly_form button{
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
+  outline: none;
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+.overly_form button{
+  background-color: orange;
+  font-size: 20px;
+  color:white;
+}
+
+
