@@ -165,7 +165,8 @@ color: #000000;
   box-shadow: 2px 2px 8px 2px gray;
   border-radius: 8px;
   overflow: hidden;
-  height:  650px;
+  height:  350px;
+  overflow-y: scroll;
  } 
 .all{
   position: fixed;

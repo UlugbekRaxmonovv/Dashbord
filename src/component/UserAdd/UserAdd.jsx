@@ -7,6 +7,9 @@ import { MdPeopleAlt } from "react-icons/md";
 import axios from '../../api'
 import { Link } from 'react-router-dom';
 import UserPutForm from './UserPutForm/UserPutForm';
+import rasm4 from  '../../assets/img/minu.png'
+import { CiSearch } from "react-icons/ci";
+import { VscBell } from "react-icons/vsc";
 
 const links ={
     full_name:"",
@@ -28,6 +31,7 @@ const UserAdd = () => {
     const [ediedForm,setEdiedForm] = useState([])
     const [img,setImg] = useState(false)
     const [form,setForm] = useState(null)
+    const [search,setSearch] = useState('')
 
 
      let javob = count1
@@ -48,7 +52,11 @@ const UserAdd = () => {
 
 
 //   table////////////////////////////
-let link =    user?.map((user)=>(
+let link =    user.filter((user) =>{
+    return user.full_name.toLowerCase().includes(search.toLowerCase())
+    //  || user.email.toLowerCase().includes(search.toLowerCase())
+    //  || user.phone_number.toLowerCase().includes(search.toLowerCase())
+})?.map((user)=>(
     <>
     <tr key={user.id}>
     <td >
@@ -137,7 +145,28 @@ const deleteUser = (id) =>{
     return (
         <>
 
+<div className='container'>
+            <div className="search">
+                <div className="search_all">
+                    <img src={rasm4} alt="" />
+                </div>
+                <div className="search_al">
+                <div className="search_alt">
+                <div className="search_alt_row">
+                <input type="text" placeholder="Search"  
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                />
+                    <CiSearch />
+                    </div> 
+                    <div className="search_alt_row">
+                    <VscBell />
 
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
         
    
 
