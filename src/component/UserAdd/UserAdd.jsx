@@ -32,6 +32,7 @@ const UserAdd = () => {
     const [img,setImg] = useState(false)
     const [form,setForm] = useState(null)
     const [search,setSearch] = useState('')
+    
 
 
      let javob = count1
@@ -54,8 +55,7 @@ const UserAdd = () => {
 //   table////////////////////////////
 let link =    user.filter((user) =>{
     return user.full_name.toLowerCase().includes(search.toLowerCase())
-    //  || user.email.toLowerCase().includes(search.toLowerCase())
-    //  || user.phone_number.toLowerCase().includes(search.toLowerCase())
+   
 })?.map((user)=>(
     <>
     <tr key={user.id}>
@@ -236,7 +236,6 @@ const deleteUser = (id) =>{
                 </div>
         
                  <div className="btn-2">
-                 <img src={rasm1} alt="" />
                     <button className="btn-1" onClick={() => setModul(!modul)}>ADD NEW USER</button>
                  </div>
             

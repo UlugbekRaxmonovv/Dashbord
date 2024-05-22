@@ -3,6 +3,9 @@ import rasm1 from  '../../assets/img/funn.png'
 import rasm2 from '../../assets/img/delet.png'
 import rasm3 from '../../assets/img/pen 1.png'
 import { MdPeopleAlt } from "react-icons/md";
+import rasm4 from  '../../assets/img/minu.png'
+import { CiSearch } from "react-icons/ci";
+import { VscBell } from "react-icons/vsc";
 import axios from '../../api'
 import './Hotel.css'
 import { Link } from 'react-router-dom';
@@ -44,8 +47,7 @@ const Hotel = () => {
     const [img,setImg] = useState(false)
     const [owner,setOwner] = useState()
     const [form,setForm] = useState(null)
-    const [filter,setFilter] = useState(filterAll)
-    const [search,setSearch] = useState(false)
+    const [search,setSearch] = useState('')
 
 
 
@@ -67,14 +69,13 @@ const Hotel = () => {
 
 
 //   table////////////////////////////
-let link =    user?.filter((user)=>{
-    return user.location.city.toLowerCase().
-    includes(filter.city.toLowerCase()) && 
-    user.location.city.toLowerCase().
-    includes(filter.country.toLowerCase()) 
-    && user.location.state_province.toLowerCase().
-    includes(filter.province.toLowerCase())
-}).map((user)=>(
+let link =    user.filter((user) =>{
+    return user.hotel_name.toLowerCase().includes(search.toLowerCase())
+      || user.contact_number.toLowerCase().includes(search.toLowerCase())
+      || user.created_at.toLowerCase().includes(search.toLowerCase())
+      || user.location.city.toLowerCase().includes(search.toLowerCase())
+      || user.location.country.toLowerCase().includes(search.toLowerCase())
+})?.map((user)=>(
     <>
     <tr key={user.hotel_id}>
     <td >
@@ -94,6 +95,7 @@ let link =    user?.filter((user)=>{
         <td>{user.location.city}</td>
         <td>{user.contact_number}</td>
         <td>{user.hotel_id  }</td>
+        <td>{user.location.country}</td>
         <td> {user.created_at} </td>
         <td>
             <div className="delet">
@@ -153,37 +155,34 @@ const deleteUser = (id) =>{
     .catch(arr => console.log(" >>>>>>>>>>" ,arr))
   }
 
-  const FilterAdd =(e) =>{
-    e.preventDefault();
-
-  }
 
 
     return (
         <div>
 
-            <form action="" onChange={FilterAdd}   className={`form__alll ${search ? "sorch" : <></>}`} >
-         <div className="input_sorch">
-            <h1>Filterlash</h1>
-            <input type="text"
-            placeholder='city'
-            value={filter.city}
-            onChange={(e) => setFilter(prive =>({...prive, city: e.target.value}))} 
-           /> <br/>
-            <input type="text"
-            placeholder='country'
-            value={filter.country}
-            onChange={(e) => setFilter(prive =>({...prive, country: e.target.value}))} 
-           /> <br />
-            <input type="text"
-            placeholder='province'
-            value={filter.province}
-            onChange={(e) => setFilter(prive =>({...prive, province: e.target.value}))} 
-           />
-           <button onClick={() => setSearch(false)}   type='button' >Cancel</button>
-         </div>
 
-            </form>
+<div className='container'>
+            <div className="search">
+                <div className="search_all">
+                    <img src={rasm4} alt="" />
+                </div>
+                <div className="search_al">
+                <div className="search_alt">
+                <div className="search_alt_row">
+                <input type="text" placeholder="Search"  
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                />
+                    <CiSearch />
+                    </div> 
+                    <div className="search_alt_row">
+                    <VscBell />
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
 
 
             <div className={`all ${modul ? "show" : "all"}`} onClick={() => setModul(false)}>
@@ -260,7 +259,6 @@ const deleteUser = (id) =>{
                  </div>
          
                   <div className="btn-2">
-                  <img onClick={() => setSearch(!search)} src={rasm1} alt="" />
                      <button className="btn-1" onClick={() => setModul(!modul)}>ADD NEW HOTEL</button>
                   </div>
              
@@ -271,6 +269,7 @@ const deleteUser = (id) =>{
      <th>City</th>
      <th>Phone</th>
      <th>Enroll Number</th>
+     <th>Country</th>
      <th className='th'>Date of admission</th>
    </tr>
  

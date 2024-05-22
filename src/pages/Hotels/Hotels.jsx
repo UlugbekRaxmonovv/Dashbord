@@ -6,13 +6,13 @@ import { Outlet } from 'react-router-dom';
 import Search from  '../../component/Search/Search'
 import Hotel from '../../component/Hotel/Hotel'
 const Hotels = () => {
+    
     return (
         <div>
             <Box sx={{ display: 'flex' }}>
             <Saidbar/>
             <Outlet/>
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-           <Search/>
            <Hotel/>
            
       </Box>

@@ -2,29 +2,6 @@
 *{
     font-family: "Montserrat", sans-serif;
 }
-.btn{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    
-  }  
-  .btn1 button {
-    padding: 4px 8px;
-    border-radius: 8px;
-    border: 1px solid gray;
-    color: black;
-    background-color: orange;
-  }
-  .btn1 button:disabled{
-    background-color: gray;
-  }
-  .number{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-  }
 
 
 

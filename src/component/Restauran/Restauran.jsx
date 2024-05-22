@@ -5,6 +5,9 @@ import rasm3 from '../../assets/img/pen 1.png'
 import { MdPeopleAlt } from "react-icons/md";
 import axios from '../../api/index';
 import { Link } from 'react-router-dom';
+import rasm4 from  '../../assets/img/minu.png'
+import { CiSearch } from "react-icons/ci";
+import { VscBell } from "react-icons/vsc";
 import UserPutForm from '../../component/UserAdd/UserPutForm/UserPutForm'
 import './Restauran.css'
 
@@ -30,6 +33,7 @@ const Restauran = () => {
     // const [ediedForm,setEdiedForm] = useState([])
     const [img,setImg] = useState(false)
     const [form,setForm] = useState(null)
+    const [search,setSearch] = useState('')
 
 
      let javob = count1
@@ -50,7 +54,13 @@ const Restauran = () => {
 
 
 //   table////////////////////////////
-let link =    user?.map((user)=>(
+let link =    user.filter((user) =>{
+    return user.restaurant_name.toLowerCase().includes(search.toLowerCase())
+    ||  user.location.city.toLowerCase().includes(search.toLowerCase())
+    || user.restaurant_id.toLowerCase().includes(search.toLowerCase())
+    || user.restaurant_name.toLowerCase().includes(search.toLowerCase())
+    || user.created_at.toLowerCase().includes(search.toLowerCase())
+})?.map((user)=>(
     <>
     <tr key={user.restaurant_id}>
     <td >
@@ -137,6 +147,29 @@ const deleteUser = (restaurant_id) =>{
 
     return (
         <div>
+
+<div className='container'>
+            <div className="search">
+                <div className="search_all">
+                    <img src={rasm4} alt="" />
+                </div>
+                <div className="search_al">
+                <div className="search_alt">
+                <div className="search_alt_row">
+                <input type="text" placeholder="Search"  
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                />
+                    <CiSearch />
+                    </div> 
+                    <div className="search_alt_row">
+                    <VscBell />
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
                   <div className={`all ${modul ? "show" : "all"}`} onClick={() => setModul(false)}>
             
             </div>
@@ -198,7 +231,6 @@ const deleteUser = (restaurant_id) =>{
                  </div>
          
                   <div className="btn-2">
-                  <img src={rasm1} alt="" />
                      <button className="btn-1" onClick={() => setModul(!modul)}>ADD NEW USER</button>
                   </div>
              

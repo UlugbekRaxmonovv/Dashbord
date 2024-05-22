@@ -66,26 +66,27 @@ const Home = () => {
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Search/>
                 <div className="home_i ">
-                     <div className="home_i_lif">
+                    <Link className="home_i_lif"  to={'/hotels'}>
                      <MdHotel/>
                      <h1>Hotels</h1>
-                    <Link className='Link' to={'/hotels'}>{user}</Link>
-                     </div>
-                     <div className="home_i_lif">
+                    <Link className='Link'>{user}</Link>
+                    </Link>
+
+                     <Link className="home_i_lif" to={'/attractions'} >
                      <IoIosRestaurant/>
                      <h1>Attractions</h1>
-                    <Link className='Link' to={'/attractions'}>{number}</Link>
-                     </div>
-                     <div className="home_i_lif">
+                    <Link className='Link' >{number}</Link>
+                     </Link>
+                     <Link className="home_i_lif"  to={'/restaurants'} >
                      <MdTableRestaurant/>
                      <h1>Restaurants</h1>
-                    <Link className='Link' to={'/restaurants'}>{state}</Link>
-                     </div>
-                     <div className="home_i_lif">
+                    <Link className='Link'>{state}</Link>
+                     </Link>
+                     <Link className="home_i_lif" to={'/users'}>
                      <FaUser/>
                      <h1>Users</h1>
-                    <Link className='Link' to={'/users'}>{attraction}</Link>
-                     </div>
+                    <Link className='Link' >{attraction}</Link>
+                     </Link>
                 </div>
 
 

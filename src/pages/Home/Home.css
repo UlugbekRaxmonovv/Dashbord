@@ -2,7 +2,9 @@
 *{
     font-family: "Montserrat", sans-serif;
 }
-
+*{
+    text-decoration: none;
+}
 .container{
     max-width: 1440px;
     margin:0 auto;
@@ -17,7 +19,7 @@
    gap: 20px;
    padding: 10px 0;
 }
-.home_i_lif{
+.home_i_lif {
     max-width: 255px;
     width: 100%;
     height: 157px;
@@ -25,6 +27,7 @@
     background: #F0F9FF;
     transition: all .1s linear;
 }
+
 .home_i_lif:hover{
     background: linear-gradient(110.42deg, #FEAF00 18.27%, #F8D442 91.84%);
     transform: scale(1.02);

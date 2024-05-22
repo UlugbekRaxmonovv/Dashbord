@@ -7,6 +7,8 @@ import { Navigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
   let navigati = useNavigate()
 
   const handleSubmit = (e) => {
@@ -15,18 +17,20 @@ const Login = () => {
       email: email,
       password: password,
     };
-  
+    setLoading(true);
     axios
-     .get(`https://tour.touristan-bs.uz/v1/users/login?email=${users.email}&password=${users.password}`)
+     .get(`/users/login?email=${users.email}&password=${users.password}`)
      .then((res) => {
-        console.log(res.data);
+      console.log(res.data);
         localStorage.setItem("token", res.data.access_token);
         navigati('/home');
 
       })
      .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setLoading(false))
+      
 
 
     
@@ -70,7 +74,7 @@ const Login = () => {
                 />
               </div>
               <div className="login_input_alt">
-                <button type="submit">SIGN IN</button>
+                <button type="submit">{loading ? 'loading....' : "SIGN IN"}</button>
               </div>
             </div>
           </form>
