@@ -6,6 +6,9 @@ import { MdPeopleAlt } from "react-icons/md";
 import rasm1 from '../../assets/img/funn.png'
 import rasm2 from '../../assets/img/delet.png'
 import rasm3 from '../../assets/img/pen 1.png'
+import rasm4 from  '../../assets/img/minu.png'
+import { CiSearch } from "react-icons/ci";
+import { VscBell } from "react-icons/vsc";
 
 
 const links ={
@@ -29,6 +32,7 @@ const Admin = () => {
     const [render,setrender] = useState(true)
     const [ediedForm,setEdiedForm] = useState([])
     const [img,setImg] = useState(false)
+    const [search,setSearch] = useState('')
 
 
      let javob = count1
@@ -46,7 +50,10 @@ const Admin = () => {
 
 
 
-let link = user?.map((user)=>(
+let link = user?.filter((user) =>{
+    return user.full_name.toLowerCase().includes(search.toLowerCase())
+          || user.email.toLowerCase().includes(search.toLowerCase())
+})?.map((user)=>(
     <>
     <tr key={user.id}>
     <td >
@@ -134,6 +141,30 @@ const deleteUser = (id) =>{
     return (
 
         <>
+
+
+<div className='container'>
+            <div className="search">
+                <div className="search_all">
+                <Link to={'/home'}> <img src={rasm4} alt="" /></Link>
+                </div>
+                <div className="search_al">
+                <div className="search_alt">
+                <div className="search_alt_row">
+                <input type="text" placeholder="Search"  
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                />
+                    <CiSearch />
+                    </div> 
+                    <div className="search_alt_row">
+                    <VscBell />
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
          <div className={`all ${modul ? "show" : "all"}`} onClick={() => setModul(false)}>
             
             </div>
@@ -198,7 +229,6 @@ const deleteUser = (id) =>{
                 </div>
         
                  <div className="btn-2">
-                 <img src={rasm1} alt="" />
                     <button className="btn-1" onClick={() => setModul(!modul)}>ADD NEW USER</button>
                  </div>
             

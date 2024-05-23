@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import rasm4 from  '../../assets/img/minu.png'
 import { CiSearch } from "react-icons/ci";
 import { VscBell } from "react-icons/vsc";
+import { VscChromeClose } from "react-icons/vsc";
 import UserPutForm from '../../component/UserAdd/UserPutForm/UserPutForm'
 import './Restauran.css'
 
@@ -30,10 +31,15 @@ const Restauran = () => {
     const[ count,setCount] = useState(0)
     const[ count1,setCount1] = useState([])  
     const [render,setrender] = useState(true)
-    // const [ediedForm,setEdiedForm] = useState([])
+    const [ediedForm,setEdiedForm] = useState(null)
     const [img,setImg] = useState(false)
     const [form,setForm] = useState(null)
     const [search,setSearch] = useState('')
+    const [modulall,setModulAll] = useState(null)
+    const [menu, setMenu] = useState(false)
+
+   
+   
 
 
      let javob = count1
@@ -54,16 +60,16 @@ const Restauran = () => {
 
 
 //   table////////////////////////////
-let link =    user.filter((user) =>{
+let link = user.filter((user) =>{
     return user.restaurant_name.toLowerCase().includes(search.toLowerCase())
-    ||  user.location.city.toLowerCase().includes(search.toLowerCase())
+    || user.location.city.toLowerCase().includes(search.toLowerCase())
     || user.restaurant_id.toLowerCase().includes(search.toLowerCase())
     || user.restaurant_name.toLowerCase().includes(search.toLowerCase())
     || user.created_at.toLowerCase().includes(search.toLowerCase())
 })?.map((user)=>(
     <>
-    <tr key={user.restaurant_id}>
-    <td >
+    <tr key={user.restaurant_id} onClick={() => setModulAll(user) || setMenu(!menu)} >
+    <td>
             <div className="tr">
             <div className="tr_th">
                 {
@@ -94,14 +100,14 @@ let link =    user.filter((user) =>{
 
 
 
-// const getTable = (id) =>{
-//     axios
-//     .get(`/users/${id}`)
-//     .then(response => {
-//         setEdiedForm(response.data);
-//     })
-// }
-   
+const getTable = (id) =>{
+    axios
+    .get(`/restaurant?restaurant_id=${id}`)
+    .then(response => {
+        setEdiedForm(response.data);
+    })
+}
+
 
 // delete////////////////////////////
 const deleteUser = (restaurant_id) =>{
@@ -114,6 +120,7 @@ const deleteUser = (restaurant_id) =>{
      }
 
     }
+    
 
 // Length ///////////////////////
     useEffect(() =>{
@@ -149,9 +156,23 @@ const deleteUser = (restaurant_id) =>{
         <div>
 
 <div className='container'>
+         
+         <div className={`resturan${menu ? "modul" : ""}`}>
+          <div className="resturan_All">
+            <VscChromeClose onClick={() => setMenu(!menu)} />
+            <div className="resturan_row">
+                <h1>{modulall?.restaurant_name}</h1>
+                <p>{modulall?.location.city}</p>
+                <p>{modulall?.restaurant_id}</p>
+                <p>{modulall?.created_at}</p>
+                <p>{modulall?.contact_number}</p>
+            </div>
+          </div>
+         </div>
+
             <div className="search">
                 <div className="search_all">
-                    <img src={rasm4} alt="" />
+                <Link to={'/home'}> <img src={rasm4} alt="" /></Link>
                 </div>
                 <div className="search_al">
                 <div className="search_alt">

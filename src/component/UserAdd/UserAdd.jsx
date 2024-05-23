@@ -6,10 +6,11 @@ import rasm3 from '../../assets/img/pen 1.png'
 import { MdPeopleAlt } from "react-icons/md";
 import axios from '../../api'
 import { Link } from 'react-router-dom';
-import UserPutForm from './UserPutForm/UserPutForm';
+// import UserPutForm from './UserPutForm/UserPutForm';
 import rasm4 from  '../../assets/img/minu.png'
 import { CiSearch } from "react-icons/ci";
 import { VscBell } from "react-icons/vsc";
+import { VscChromeClose } from "react-icons/vsc";
 
 const links ={
     full_name:"",
@@ -32,6 +33,8 @@ const UserAdd = () => {
     const [img,setImg] = useState(false)
     const [form,setForm] = useState(null)
     const [search,setSearch] = useState('')
+    const [modulall,setModulAll] = useState(null)
+    const [menu, setMenu] = useState(false)
     
 
 
@@ -53,12 +56,12 @@ const UserAdd = () => {
 
 
 //   table////////////////////////////
-let link =    user.filter((user) =>{
+let link =    user?.filter((user) =>{
     return user.full_name.toLowerCase().includes(search.toLowerCase())
    
 })?.map((user)=>(
     <>
-    <tr key={user.id}>
+    <tr key={user.id}  onClick={() =>setModulAll(user) || setMenu(!menu)}>
     <td >
             <div className="tr">
             <div className="tr_th">
@@ -146,9 +149,24 @@ const deleteUser = (id) =>{
         <>
 
 <div className='container'>
+
+<div className={`resturan${menu ? "modul" : ""}`}>
+          <div className="resturan_All">
+            <VscChromeClose onClick={() => setMenu(!menu)} />
+            <div className="resturan_row">
+                <h1>{modulall?.full_name}</h1>
+                <p>{modulall?.email}</p>
+                <p>{modulall?.phone_number}</p>
+                <p>{modulall?.id}</p>
+                <p>{modulall?.created_at}</p>
+            </div>
+          </div>
+         </div>
+
+
             <div className="search">
                 <div className="search_all">
-                    <img src={rasm4} alt="" />
+                <Link to={'/home'}> <img src={rasm4} alt="" /></Link>
                 </div>
                 <div className="search_al">
                 <div className="search_alt">
@@ -279,12 +297,12 @@ const deleteUser = (id) =>{
         </div>
         </section>
 
-   
+{/*    
    {
     form ? <UserPutForm   data={form} setData={setForm}  />
     :
     <></>
-   }
+   } */}
     
 
        

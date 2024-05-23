@@ -6,6 +6,7 @@
 .box{
     background-color: #F9D13C;
     padding: 40px 0;
+    height: 100vh;
 }
 .container{
     max-width: 1240px;

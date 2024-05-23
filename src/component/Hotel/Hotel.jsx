@@ -69,7 +69,7 @@ const Hotel = () => {
 
 
 //   table////////////////////////////
-let link =    user.filter((user) =>{
+let link =    user?.filter((user) =>{
     return user.hotel_name.toLowerCase().includes(search.toLowerCase())
       || user.contact_number.toLowerCase().includes(search.toLowerCase())
       || user.created_at.toLowerCase().includes(search.toLowerCase())
@@ -164,7 +164,7 @@ const deleteUser = (id) =>{
 <div className='container'>
             <div className="search">
                 <div className="search_all">
-                    <img src={rasm4} alt="" />
+                <Link to={'/home'}> <img src={rasm4} alt="" /></Link>
                 </div>
                 <div className="search_al">
                 <div className="search_alt">

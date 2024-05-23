@@ -74,7 +74,7 @@ const Login = () => {
                 />
               </div>
               <div className="login_input_alt">
-                <button type="submit">{loading ? 'loading....' : "SIGN IN"}</button>
+                <button type="submit">{loading ? 'Loading....' : "SIGN IN"}</button>
               </div>
             </div>
           </form>

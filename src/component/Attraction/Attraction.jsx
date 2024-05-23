@@ -6,6 +6,10 @@ import rasm3 from '../../assets/img/pen 1.png'
 import { MdPeopleAlt } from "react-icons/md";
 import axios from '../../api/index';
 import { Link } from 'react-router-dom';
+import rasm4 from  '../../assets/img/minu.png'
+import { CiSearch } from "react-icons/ci";
+import { VscBell } from "react-icons/vsc";
+import { VscChromeClose } from "react-icons/vsc";
 
 
 const links ={
@@ -28,6 +32,9 @@ const Attraction = () => {
     // const [ediedForm,setEdiedForm] = useState([])
     const [img,setImg] = useState(false)
     const [form,setForm] = useState(null)
+    const [search,setSearch] = useState('')
+    const [modulall,setModulAll] = useState(null)
+    const [menu, setMenu] = useState(false)
 
 
      let javob = count1
@@ -48,9 +55,15 @@ const Attraction = () => {
 
 
 //   table////////////////////////////
-let link =    user?.map((user)=>(
+let link = user?.filter((user) =>{
+    return user.attraction_name.toLowerCase().includes(search.toLowerCase())
+      || user.location.city.toLowerCase().includes(search.toLowerCase())
+      || user.contact_number.toLowerCase().includes(search.toLowerCase())
+      || user.owner_id.toLowerCase().includes(search.toLowerCase())
+      || user.created_at.toLowerCase().includes(search.toLowerCase())
+})?.map((user)=>(
     <>
-    <tr key={user.id}>
+    <tr key={user.attraction_id}  onClick={() =>setModulAll(user) || setMenu(!menu)}>
     <td >
             <div className="tr">
             <div className="tr_th">
@@ -61,7 +74,7 @@ let link =    user?.map((user)=>(
                 }
                 </div>
                 <div className="tr_th">  
-                {user.restaurant_name}
+                {user.attraction_name}
                 </div>
             </div>
             </td>
@@ -72,7 +85,7 @@ let link =    user?.map((user)=>(
         <td>
             <div className="delet">
         <img src={rasm3} alt=""  onClick={() => setForm(user)} />
-        <button onClick={() => deleteUser(user.id)}>
+        <button onClick={() => deleteUser(user.attraction_id)}>
         <img src={rasm2} alt="" />
         </button>
             </div>
@@ -95,9 +108,9 @@ let link =    user?.map((user)=>(
 const deleteUser = (id) =>{
      if(window.confirm('Are you sure you want to delete')){
         axios
-        .delete(`/restaurant?restaurant_id=${id}`)
+        .delete(`/attraction?attraction_id=${id}`)
         .then(response => {
-            console.log(response);
+            setrender(response);
         })
      }
 
@@ -134,6 +147,51 @@ const deleteUser = (id) =>{
   }
     return (
         <div>
+
+
+
+
+<div className='container'>
+            <div className="search">
+                <div className="search_all">
+                <Link to={'/home'}> <img src={rasm4} alt="" /></Link>
+                </div>
+                <div className="search_al">
+                <div className="search_alt">
+                <div className="search_alt_row">
+                <input type="text" placeholder="Search"  
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                />
+                    <CiSearch />
+                    </div> 
+                    <div className="search_alt_row">
+                    <VscBell />
+
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+            <div className={`resturan${menu ? "modul" : ""}`}>
+          <div className="resturan_All">
+            <VscChromeClose onClick={() => setMenu(!menu)} />
+            <div className="resturan_row">
+                <h1>{modulall?.attraction_name}</h1>
+                <p>{modulall?.location.city}</p>
+                <p>{modulall?.contact_number}</p>
+                <p>{modulall?.owner_id}</p>
+                <p>{modulall?.created_at}</p>
+            </div>
+          </div>
+         </div>
+
+
+
+        </div>
+
+
         <div className={`all ${modul ? "show" : "all"}`} onClick={() => setModul(false)}>
   
   </div>
@@ -195,7 +253,6 @@ const deleteUser = (id) =>{
        </div>
 
         <div className="btn-2">
-        <img src={rasm1} alt="" />
            <button className="btn-1" onClick={() => setModul(!modul)}>ADD NEW USER</button>
         </div>
    

@@ -11,7 +11,6 @@ const Attractions = () => {
             <Box sx={{ display: 'flex' }}>
             <Saidbar/>
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <Search/>
           <Attraction/>
       </Box>
             </Box>

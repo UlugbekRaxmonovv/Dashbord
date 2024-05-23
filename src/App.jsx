@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'
 import { Route, Routes } from 'react-router-dom';
 import Hotels from './pages/Hotels/Hotels.jsx';
 import Users from './pages/Users/Users.jsx';
@@ -10,9 +11,16 @@ import Home from './pages/Home/Home.jsx';
 import Login from './pages/Login/Login.jsx';
 import Auth from './pages/Auth/Auth.jsx';
 import DeletUser from './pages/DeletUser/DeletUser.jsx';
+import AnimatedCursor from 'react-animated-cursor';
 function App() {
   return (
     <>
+    <div className="App">
+      <AnimatedCursor
+      color='255, 169, 9'
+      />
+    </div>
+
     
         <Routes>
           <Route path='/' element={<Login />} />
