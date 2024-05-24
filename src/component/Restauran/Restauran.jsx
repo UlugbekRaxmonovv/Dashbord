@@ -38,8 +38,6 @@ const Restauran = () => {
     const [modulall,setModulAll] = useState(null)
     const [menu, setMenu] = useState(false)
 
-   
-   
 
 
      let javob = count1
@@ -60,7 +58,7 @@ const Restauran = () => {
 
 
 //   table////////////////////////////
-let link = user.filter((user) =>{
+let link = user?.filter((user) =>{
     return user.restaurant_name.toLowerCase().includes(search.toLowerCase())
     || user.location.city.toLowerCase().includes(search.toLowerCase())
     || user.restaurant_id.toLowerCase().includes(search.toLowerCase())
@@ -100,13 +98,13 @@ let link = user.filter((user) =>{
 
 
 
-const getTable = (id) =>{
-    axios
-    .get(`/restaurant?restaurant_id=${id}`)
-    .then(response => {
-        setEdiedForm(response.data);
-    })
-}
+// const getTable = (id) =>{
+//     axios
+//     .get(`/restaurant?restaurant_id=${id}`)
+//     .then(response => {
+//         setEdiedForm(response.data);
+//     })
+// }
 
 
 // delete////////////////////////////
@@ -295,13 +293,6 @@ const deleteUser = (restaurant_id) =>{
          </div>
          </section>
  
-            
-{/* 
-         {
-    form ? <UserPutForm   data={form} setData={setForm}  />
-    :
-    <></>
-   } */}
         </div>
     );
 }

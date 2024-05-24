@@ -11,6 +11,7 @@ import rasm4 from  '../../assets/img/minu.png'
 import { CiSearch } from "react-icons/ci";
 import { VscBell } from "react-icons/vsc";
 import { VscChromeClose } from "react-icons/vsc";
+import { toast } from 'react-toastify';
 
 const links ={
     full_name:"",
@@ -35,9 +36,10 @@ const UserAdd = () => {
     const [search,setSearch] = useState('')
     const [modulall,setModulAll] = useState(null)
     const [menu, setMenu] = useState(false)
-    
+    const [loading, setLoading] = useState(false)
+    const [menu1, setMenu1] = useState(false)
 
-
+    document.body.style.overflow =  user ? "hidden" : "auto"
      let javob = count1
      let javob1 = javob / 10 
      let javob2 = Math.ceil(javob1)
@@ -68,7 +70,7 @@ let link =    user?.filter((user) =>{
                 {
                     img ? 
                     <img src={user?.profile_img} alt="img" />
-                    : <MdPeopleAlt style={{fontSize:'30px',color:'gray'}} />
+                    :<MdPeopleAlt style={{fontSize:'30px',color:'gray'}} />
                 }
                 </div>
                 <div className="tr_th">  
@@ -135,13 +137,23 @@ const deleteUser = (id) =>{
   const AddTable = (event) =>{
     event.preventDefault()
     setName(links)
+    setLoading(true)
     axios
     .post('/users',name)
     .then(response => {
         setrender(p => !p)
         console.log(response);
+        setModul(false)
+        toast.success("Ma'lumot yaratildi")
+
+
     })
-    .catch(arr => console.log(" >>>>>>>>>>" ,arr))
+    .catch(arr => {
+        console.log(" >>>>>>>>>>" ,arr)
+        toast.error('Xato')
+
+    })
+    .finally(() => setLoading(false));
   }
 
 
@@ -154,11 +166,19 @@ const deleteUser = (id) =>{
           <div className="resturan_All">
             <VscChromeClose onClick={() => setMenu(!menu)} />
             <div className="resturan_row">
-                <h1>{modulall?.full_name}</h1>
-                <p>{modulall?.email}</p>
-                <p>{modulall?.phone_number}</p>
-                <p>{modulall?.id}</p>
-                <p>{modulall?.created_at}</p>
+                <img width={120} src={modulall?.profile_img} alt="" />
+                <p title={modulall?.id}><span>Id :</span>{modulall?.id}</p>
+                <p><span>Full Name: </span>{modulall?.full_name}</p>
+                <p><span>Date Of Birth: </span>{modulall?.date_of_birth}</p>
+                <p><span>Email: </span>{modulall?.email}</p>
+                <p> <span>Phone Number : </span> {modulall?.phone_number}</p>
+                <p><span>Role : </span>{modulall?.role}</p>
+                <p><span>Card : </span>{modulall?.card}</p>
+                
+                <p><span>Created At : </span>{modulall?.created_at}</p>
+                <p> <span>Updated At : </span>{modulall?.updated_at}</p>
+                <p><span>Deleted At : </span>{modulall?.deleted_at}</p>
+              
             </div>
           </div>
          </div>
@@ -235,7 +255,7 @@ const deleteUser = (id) =>{
                  value={name.card}
                  onChange={ e =>  setName(prev => ({...prev, card: e.target.value}))}
                  /> <br />
-                 <button>Submit</button>
+                 <button>{loading ? "Loading" : "Submit"}</button>
                  </form> 
                 </div>          
             </div>

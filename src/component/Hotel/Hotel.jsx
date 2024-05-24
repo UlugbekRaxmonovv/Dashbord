@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react';
-import rasm1 from  '../../assets/img/funn.png'
 import rasm2 from '../../assets/img/delet.png'
 import rasm3 from '../../assets/img/pen 1.png'
 import { MdPeopleAlt } from "react-icons/md";
@@ -9,8 +8,7 @@ import { VscBell } from "react-icons/vsc";
 import axios from '../../api'
 import './Hotel.css'
 import { Link } from 'react-router-dom';
-import UserPutForm from '../../component/UserAdd/UserPutForm/UserPutForm'
-import { Filter } from '@mui/icons-material';
+import { VscChromeClose } from "react-icons/vsc";
 
 const links ={
     contact_number:"",
@@ -27,6 +25,7 @@ const links ={
     state_province:"",
              },
 website_url:"",
+rating:"",
 }
 
 
@@ -48,14 +47,16 @@ const Hotel = () => {
     const [owner,setOwner] = useState()
     const [form,setForm] = useState(null)
     const [search,setSearch] = useState('')
+    const [menu, setMenu] = useState(false)
+    const [modulall,setModulAll] = useState(null)
 
 
-
+    // scroll
+    // document.body.style.overflow =  user ? "hidden" : "auto"
+    // counter
      let javob = count1
      let javob1 = javob / 10 
      let javob2 = Math.ceil(javob1)
-
-
 
     //  limit///////////////////////////////
     useEffect(() =>{
@@ -77,7 +78,7 @@ let link =    user?.filter((user) =>{
       || user.location.country.toLowerCase().includes(search.toLowerCase())
 })?.map((user)=>(
     <>
-    <tr key={user.hotel_id}>
+    <tr key={user.hotel_id} onClick={() =>setModulAll(user) || setMenu(!menu)}>
     <td >
             <div className="tr">
             <div className="tr_th">
@@ -161,6 +162,34 @@ const deleteUser = (id) =>{
         <div>
 
 
+
+<div className={`resturan${menu ? "modul" : ""}`}>
+          <div className="resturan_All">
+            <VscChromeClose onClick={() => setMenu(!menu)} />
+            <div className="resturan_row">
+                <img width={150} src={modulall?.images[1]?.image_url} alt="img" />
+                <p title={modulall?.id}><span>Id :</span>{modulall?.hotel_id}</p>
+                <p><span>Full Name: </span>{modulall?.hotel_name}</p>
+                <p><span>Owner Id: </span>{modulall?.owner_id}</p>
+                <p><span>Date Of Birth: </span>{modulall?.date_of_birth}</p>
+                <p><span>Description: </span>{modulall?.description}</p>
+                <p><span>Rating: </span>{modulall?.rating}</p>
+                <p><span>Contact Number: </span>{modulall?.contact_number}</p>
+                <p><span>Created At: </span>{modulall?.created_at}</p>
+                <p> <span>Updated At: </span> {modulall?.updated_at}</p>
+                <p><span>Location_id : </span>{modulall?.location?.location_id}</p>
+                <p><span>Establishment_id : </span>{modulall?.location?.establishment_id}</p>
+                <p><span>Address : </span>{modulall?.location?.address}</p>
+                <p><span>Latitude : </span>{modulall?.location?.latitude}</p>
+                <p><span>Longitude : </span>{modulall?.location?.longitude}</p>
+                <p><span>Atate Province : </span>{modulall?.location?.state_province}</p>
+                <p><span>Country : </span>{modulall?.location?.country}</p>
+                <p><span>City : </span>{modulall?.location?.city}</p>
+    
+            </div>
+          </div>
+         </div>
+
 <div className='container'>
             <div className="search">
                 <div className="search_all">
@@ -192,11 +221,6 @@ const deleteUser = (id) =>{
            <div className={`modal ${modul ? "show" : "modal"}`}>
              <div className="modal_row">
                   <form action="" onSubmit={AddTable}>
-                  <label htmlFor="">Owner id</label> <br />
-                  <input
-                  value={owner}
-                  onChange={(e) => setOwner(e.target.value)}
-                  type="text" /> <br />
                   <label htmlFor="">Contact Number </label> <br />
                   <input
                   value={name.contact_number}
@@ -243,6 +267,11 @@ const deleteUser = (id) =>{
                   value={name.website_url}
                   onChange={ e =>  setName(prev => ({...prev, website_url: e.target.value}))}
                   /> <br />
+                    <label htmlFor="">Rating</label> <br />
+                  <input
+                  value={name.rating}
+                  onChange={(e) => setOwner(e.target.value)}
+                  type="text" /> <br />
                   <button>Submit</button>
                   </form> 
                  </div>          

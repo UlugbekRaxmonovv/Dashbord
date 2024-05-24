@@ -110,12 +110,6 @@ const deleteUser = (id) =>{
     }
 
 
-
-
-
-
-
-
     useEffect(() =>{
         axios
         .get('/admins/list?limit=10&page=1')

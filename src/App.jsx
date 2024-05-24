@@ -12,6 +12,8 @@ import Login from './pages/Login/Login.jsx';
 import Auth from './pages/Auth/Auth.jsx';
 import DeletUser from './pages/DeletUser/DeletUser.jsx';
 import AnimatedCursor from 'react-animated-cursor';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
@@ -19,6 +21,7 @@ function App() {
       <AnimatedCursor
       color='255, 169, 9'
       />
+      <ToastContainer/>
     </div>
 
     
