@@ -19,9 +19,8 @@ const Login = () => {
     };
     setLoading(true);
     axios
-     .get(`/users/login?email=${users.email}&password=${users.password}`)
+     .get(`/admins/login?email=${users.email}&password=${users.password}`)
      .then((res) => {
-      console.log(res.data);
         localStorage.setItem("token", res.data.access_token);
         navigati('/home');
 

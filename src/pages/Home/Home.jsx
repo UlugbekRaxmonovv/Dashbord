@@ -50,7 +50,7 @@ const Home = () => {
 
     useEffect(() =>{
         axios
-        .get('/users/list?limit=5&page=1&column=role&value=user')
+        .get('/users/list?limit=10&page=1&column=role&value=user')
         .then((res) =>{
             setAttraction(res.data.count);
         })

@@ -9,32 +9,44 @@ import axios from '../../api'
 import './Hotel.css'
 import { Link } from 'react-router-dom';
 import { VscChromeClose } from "react-icons/vsc";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation,Autoplay } from 'swiper/modules';
 
-const links ={
+
+
+const links =[
+  {
     contact_number:"",
     description:"",
     hotel_name:"",
-    images:[{
-        image_url:"",
-    }],
+    images:[],
+    licence_url:"",
     location:{
+    address:"",
     city:"", 
+    country:"",
     latitude:"",
-    country:"",
     longitude:"",
-    state_province:"",
-             },
-website_url:"",
-rating:"",
-}
+    state_province:""
+     },
+     rating:"",
+     website_url:""
+   
+  }
+
+]
 
 
-const filterAll ={
-    city:"",
-    country:"",
-    province:"",
 
-}
+
+// const filterAll ={
+//     city:"",
+//     country:"",
+//     province:"",
+
+// }
 const Hotel = () => {
     const [user,setUser] = useState([])
     const [modul,setModul] = useState(false)
@@ -42,13 +54,15 @@ const Hotel = () => {
     const[ count,setCount] = useState(0)
     const[ count1,setCount1] = useState([])  
     const [render,setrender] = useState(true)
-    const [ediedForm,setEdiedForm] = useState([])
+    // const [ediedForm,setEdiedForm] = useState([])
     const [img,setImg] = useState(false)
-    const [owner,setOwner] = useState()
     const [form,setForm] = useState(null)
     const [search,setSearch] = useState('')
     const [menu, setMenu] = useState(false)
     const [modulall,setModulAll] = useState(null)
+
+
+
 
 
     // scroll
@@ -143,20 +157,20 @@ const deleteUser = (id) =>{
 
     },[])
 
-    // table push//////////////////
-  const AddTable = (event) =>{
-    event.preventDefault()
-    setName(links)
-    axios
-    .post('/hotel?owner_id=ea64eb3e-a844-4ecd-861d-500e09c66897%09',name)
-    .then(response => {
-        setrender(p => !p)
-        console.log(response);
-    })
-    .catch(arr => console.log(" >>>>>>>>>>" ,arr))
-  }
+ 
 
-
+       // table push//////////////////
+       const AddTable = (event) =>{
+        event.preventDefault()
+        setName(links)
+        axios
+        .post('/hotel',name)
+        .then(response => {
+            setrender(p => !p)
+            console.log(response);
+        })
+        .catch(arr => console.log(" >>>>>>>>>>" ,arr))
+      }
 
     return (
         <div>
@@ -167,11 +181,28 @@ const deleteUser = (id) =>{
           <div className="resturan_All">
             <VscChromeClose onClick={() => setMenu(!menu)} />
             <div className="resturan_row">
-                <img width={150} src={modulall?.images[1]?.image_url} alt="img" />
+            <Swiper
+      navigation={true}
+      modules={[Navigation, Autoplay]}
+    //   autoplay={{
+    //     delay: 2500,
+    //     disableOnInteraction: false,
+    //   }}
+    //   loop={true}
+      className="mySwiper"
+    >
+      {modulall?.images?.map((el) => (
+        <SwiperSlide key={el.id}>
+          <div style={{ display: 'flex',justifyContent:'center',alignItems:'center'}}>
+            <img width={100} src={el.image_url}  alt="rasm" />
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
                 <p title={modulall?.id}><span>Id :</span>{modulall?.hotel_id}</p>
                 <p><span>Full Name: </span>{modulall?.hotel_name}</p>
                 <p><span>Owner Id: </span>{modulall?.owner_id}</p>
-                <p><span>Date Of Birth: </span>{modulall?.date_of_birth}</p>
+                <p><span>Website: </span>{modulall?.website_url}</p>
                 <p><span>Description: </span>{modulall?.description}</p>
                 <p><span>Rating: </span>{modulall?.rating}</p>
                 <p><span>Contact Number: </span>{modulall?.contact_number}</p>
@@ -232,17 +263,18 @@ const deleteUser = (id) =>{
                    onChange={ e =>  setName(prev => ({...prev, description: e.target.value}))}
                    type="text" /> <br />
                   <label htmlFor=""> Hotel Name</label> <br />
-                  <input type="text" name="password"
+                  <input type="text" 
                    value={name.hotel_name}
                    onChange={ e =>  setName(prev => ({...prev, hotel_name: e.target.value}))}
                   /><br />
+  
                   <label htmlFor="">City</label> <br />
                   <input type="text"
                    value={name.city}
                    onChange={ e =>  setName(prev => ({...prev, city: e.target.value}))}
                   /><br />
                   <label htmlFor="">Latitude</label> <br />
-                <input type="text"
+                <input type="number"
                 value={name.latitude}
                 onChange={ e =>  setName(prev => ({...prev, latitude: e.target.value}))}
 
@@ -253,7 +285,7 @@ const deleteUser = (id) =>{
                     onChange={ e =>  setName(prev => ({...prev, country: e.target.value}))}
                    /> <br />
                   <label htmlFor="">Longitude</label> <br />
-                  <input type="text" 
+                  <input type="number" 
                   value={name.longitude}
                   onChange={ e =>  setName(prev => ({...prev, longitude: e.target.value}))}
                   /> <br />
@@ -270,8 +302,8 @@ const deleteUser = (id) =>{
                     <label htmlFor="">Rating</label> <br />
                   <input
                   value={name.rating}
-                  onChange={(e) => setOwner(e.target.value)}
-                  type="text" /> <br />
+                  onChange={ e =>  setName(prev => ({...prev, rating: e.target.value}))}
+                  type="number" /> <br />
                   <button>Submit</button>
                   </form> 
                  </div>          

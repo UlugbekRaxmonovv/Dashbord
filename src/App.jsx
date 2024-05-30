@@ -18,9 +18,9 @@ function App() {
   return (
     <>
     <div className="App">
-      <AnimatedCursor
+      {/* <AnimatedCursor
       color='255, 169, 9'
-      />
+      /> */}
       <ToastContainer/>
     </div>
 
