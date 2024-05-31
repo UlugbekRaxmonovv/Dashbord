@@ -21,7 +21,7 @@ const DeletUser = () => {
     const [menu, setMenu] = useState(false)
     const [modulall,setModulAll] = useState(null)
 
-    document.body.style.overflow =  user ? "hidden" : "auto"
+    document.body.style.overflow =  menu ? "hidden" : "auto"
     useEffect(() =>{
      axios
      .get(`/users/list/deleted?limit=10&page=${count + 1 }`)

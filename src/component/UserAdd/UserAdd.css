@@ -328,3 +328,16 @@ color: #000000;
       }
     }
 
+@media(max-width:800px){
+  .tabli{
+    overflow: auto !important;
+  }
+  .UserAdd_i{
+    display: flex;
+    align-items: center;
+    justify-content:  center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #E5E5E5;
+    padding: 10px 0;
+}
+}

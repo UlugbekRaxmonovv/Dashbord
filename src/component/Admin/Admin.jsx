@@ -12,13 +12,13 @@ import { VscBell } from "react-icons/vsc";
 
 
 const links ={
-    full_name:"",
+    card:"",
+    date_of_birth:"",
     email:"",
+    full_name:"",
+    gender:"",
     password:"",
     phone_number:"",
-    gender:"",
-    date_of_birth:"",
-    card:"",
   }
 
 const Admin = () => {
@@ -34,7 +34,7 @@ const Admin = () => {
     const [img,setImg] = useState(false)
     const [search,setSearch] = useState('')
 
-
+    document.body.style.overflow =  modul ? "hidden" : "auto"
      let javob = count1
      let javob1 = javob / 10 
      let javob2 = Math.ceil(javob1)
@@ -131,7 +131,7 @@ const deleteUser = (id) =>{
         console.log(response);
     })
     .catch(arr => console.log(" >>>>>>>>>>" ,arr))
-  }
+     }
     return (
 
         <>

@@ -39,7 +39,8 @@ const UserAdd = () => {
     const [loading, setLoading] = useState(false)
     const [menu1, setMenu1] = useState(false)
 
-    document.body.style.overflow =  user ? "hidden" : "auto"
+    document.body.style.overflow =  menu ? "hidden" : "auto"
+    document.body.style.overflow =  modul ? "hidden" : "auto"
      let javob = count1
      let javob1 = javob / 10 
      let javob2 = Math.ceil(javob1)
@@ -278,7 +279,8 @@ const deleteUser = (id) =>{
                  </div>
             
             </div>
-            <table>
+<div className="tabli">
+<table>
   <tr>
     <th>Name</th>
     <th>Email</th>
@@ -293,6 +295,7 @@ const deleteUser = (id) =>{
 
 
 </table>
+</div>
 <div className="btn">
     
 <div className="btn1">

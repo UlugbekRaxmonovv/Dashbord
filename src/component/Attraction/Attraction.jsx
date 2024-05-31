@@ -29,20 +29,18 @@ const Attraction = () => {
     const[ count,setCount] = useState(0)
     const[ count1,setCount1] = useState([])  
     const [render,setrender] = useState(true)
-    // const [ediedForm,setEdiedForm] = useState([])
+    const [ediedForm,setEdiedForm] = useState([])
     const [img,setImg] = useState(false)
     const [form,setForm] = useState(null)
     const [search,setSearch] = useState('')
     const [modulall,setModulAll] = useState(null)
     const [menu, setMenu] = useState(false)
 
-
      let javob = count1
      let javob1 = javob / 10 
      let javob2 = Math.ceil(javob1)
 
-
-
+     document.body.style.overflow =  menu ? "hidden" : "auto"
     //  limit///////////////////////////////
     useEffect(() =>{
       axios
@@ -175,14 +173,23 @@ const deleteUser = (id) =>{
 
 
             <div className={`resturan${menu ? "modul" : ""}`}>
+                
           <div className="resturan_All">
             <VscChromeClose onClick={() => setMenu(!menu)} />
             <div className="resturan_row">
-                <h1>{modulall?.attraction_name}</h1>
-                <p>{modulall?.location.city}</p>
-                <p>{modulall?.contact_number}</p>
-                <p>{modulall?.owner_id}</p>
-                <p>{modulall?.created_at}</p>
+
+                <p title={modulall?.id}><span>Id :</span>{modulall?.attraction_id}</p>
+                <p><span>Attraction Name: </span>{modulall?.attraction_name}</p>
+                <p><span>Contact Number: </span>{modulall?.contact_number}</p>
+                <p><span>Description: </span>{modulall?.description}</p>
+                <p> <span>Address : </span> {modulall?.location.address}</p>
+                <p><span>City: </span>{modulall?.location.city}</p>
+                <p><span>Country : </span>{modulall?.location.country}</p>
+                <p><span>Longitude : </span>{modulall?.location.longitude}</p>                
+                <p><span>Latitude : </span>{modulall?.location.latitude}</p>
+                <p> <span>State Province : </span>{modulall?.location.state_province}</p>
+                <p><span>Rating : </span>{modulall?.rating}</p>
+               
             </div>
           </div>
          </div>

@@ -257,9 +257,9 @@ setAdmin(response.data))
                     justifyContent: 'center',
                   }}
                 >
-                <RiLogoutBoxLine style={{fontSize:'30px',marginTop:'300%'}}/>
+                <RiLogoutBoxLine style={{fontSize:'30px'}}/>
                 </ListItemIcon>
-                <ListItemText style={{marginTop:'50%',marginLeft:'-10%'}} primary="Logout" sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText  primary="Logout" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
 

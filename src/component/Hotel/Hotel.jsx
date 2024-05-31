@@ -66,7 +66,8 @@ const Hotel = () => {
 
 
     // scroll
-    // document.body.style.overflow =  user ? "hidden" : "auto"
+    document.body.style.overflow =  modul ? "hidden" : "auto"
+    document.body.style.overflow =  menu ? "hidden" : "auto"
     // counter
      let javob = count1
      let javob1 = javob / 10 

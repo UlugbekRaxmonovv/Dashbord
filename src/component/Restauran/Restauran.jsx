@@ -38,6 +38,9 @@ const Restauran = () => {
     const [modulall,setModulAll] = useState(null)
     const [menu, setMenu] = useState(false)
 
+    document.body.style.overflow =  menu ? "hidden" : "auto"
+    document.body.style.overflow =  modul ? "hidden" : "auto"
+
 
 
      let javob = count1
@@ -159,11 +162,17 @@ const deleteUser = (restaurant_id) =>{
           <div className="resturan_All">
             <VscChromeClose onClick={() => setMenu(!menu)} />
             <div className="resturan_row">
-                <h1>{modulall?.restaurant_name}</h1>
-                <p>{modulall?.location.city}</p>
-                <p>{modulall?.restaurant_id}</p>
-                <p>{modulall?.created_at}</p>
-                <p>{modulall?.contact_number}</p>
+         
+                <p><span>Restaurant Name: </span>{modulall?.restaurant_name}</p>
+                <p><span>Contact Number: </span>{modulall?.contact_number}</p>
+                <p><span>Description: </span>{modulall?.description}</p>
+                <p> <span>Address : </span> {modulall?.location.address}</p>
+                <p><span>City: </span>{modulall?.location.city}</p>
+                <p><span>Country : </span>{modulall?.location.country}</p>
+                <p><span>Longitude : </span>{modulall?.location.longitude}</p>                
+                <p><span>Latitude : </span>{modulall?.location.latitude}</p>
+                <p> <span>State Province : </span>{modulall?.location.state_province}</p>
+                <p><span>Rating : </span>{modulall?.rating}</p>
             </div>
           </div>
          </div>
