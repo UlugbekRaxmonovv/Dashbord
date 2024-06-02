@@ -19,7 +19,7 @@ const Login = () => {
     };
     setLoading(true);
     axios
-     .get(`/admins/login?email=${users.email}&password=${users.password}`)
+     .post(`/admins/login`,users)
      .then((res) => {
         localStorage.setItem("token", res.data.access_token);
         navigati('/home');
