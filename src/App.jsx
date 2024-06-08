@@ -14,6 +14,7 @@ import DeletUser from './pages/DeletUser/DeletUser.jsx';
 import AnimatedCursor from 'react-animated-cursor';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import ForgetPassword from './component/ForgetPassword/ForgetPassword.jsx';
 function App() {
   return (
     <>
@@ -27,6 +28,7 @@ function App() {
     
         <Routes>
           <Route path='/' element={<Login />} />
+          <Route path="/forget" element={<ForgetPassword />}/>
           <Route path="/" element={<Auth />}> 
           <Route path="home" element={<Home />}/>
           <Route path="users" element={<Users />}/>

@@ -64,8 +64,8 @@ let link =    user?.filter((user) =>{
    
 })?.map((user)=>(
     <>
-    <tr key={user.id}  onClick={() =>setModulAll(user) || setMenu(!menu)}>
-    <td >
+    <tr key={user.id} >
+    <td  onClick={() =>setModulAll(user) || setMenu(!menu)}>
             <div className="tr">
             <div className="tr_th">
                 {
@@ -79,10 +79,10 @@ let link =    user?.filter((user) =>{
                 </div>
             </div>
             </td>
-        <td>{user.email}</td>
-        <td>{user.phone_number}</td>
-        <td>{user.id}</td>
-        <td> {user.created_at} </td>
+        <td  onClick={() =>setModulAll(user) || setMenu(!menu)} className='email'>{user.email}</td>
+        <td  onClick={() =>setModulAll(user) || setMenu(!menu)}>{user.phone_number}</td>
+        <td  onClick={() =>setModulAll(user) || setMenu(!menu)}>{user.id}</td>
+        <td  onClick={() =>setModulAll(user) || setMenu(!menu)}> {user.created_at} </td>
         <td>
             <div className="delet">
         <img src={rasm3} alt=""  onClick={() => setForm(user)} />

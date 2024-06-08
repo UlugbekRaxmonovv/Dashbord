@@ -139,6 +139,7 @@ font-weight: 400;
 line-height: 17.07px;
 text-align: left;
 color: #000000;
+
   }
   .tr{
     display: flex;
@@ -146,7 +147,6 @@ color: #000000;
      gap: 20px;
   }
 
-  
   tr:nth-child(even) {
     background-color:white;
   }

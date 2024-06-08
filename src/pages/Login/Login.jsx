@@ -3,11 +3,15 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../api";
 import { Navigate } from "react-router-dom";
+import { PiEyeFill } from "react-icons/pi";
+import { PiEyeSlashFill } from "react-icons/pi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [eye,setEye] = useState(false);
+  console.log(eye);
 
   let navigati = useNavigate()
 
@@ -21,6 +25,7 @@ const Login = () => {
     axios
      .post(`/admins/login`,users)
      .then((res) => {
+      console.log(res);
         localStorage.setItem("token", res.data.access_token);
         navigati('/home');
 
@@ -64,14 +69,28 @@ const Login = () => {
               <div className="login_input">
                 <label htmlFor="">Password</label>
                 <br />
-                <input
-                  type="password"
+               <div className="int">
+               <div className="int_a">
+              <input
+                  type={
+                    eye ? "text" : "password" 
+                  }
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   required
                 />
               </div>
+              <div className="int_a" onClick={() => setEye(p => !p)} >
+                {
+                  eye ?     <PiEyeSlashFill className="eye"/>
+                  : <PiEyeFill   className="eye"/>
+                }
+               
+                </div>
+                </div>
+              </div>
+              <Link to={'/forget'} style={{color:'gray'}}>FogetPassword</Link>
               <div className="login_input_alt">
                 <button type="submit">{loading ? 'Loading....' : "SIGN IN"}</button>
               </div>

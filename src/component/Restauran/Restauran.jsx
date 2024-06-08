@@ -13,21 +13,27 @@ import UserPutForm from '../../component/UserAdd/UserPutForm/UserPutForm'
 import './Restauran.css'
 
 
-const links ={
-    full_name:"",
-    email:"",
-    password:"",
-    phone_number:"",
-    gender:"",
-    date_of_birth:"",
-    card:"",
+
+const intialstate = {
+    address: "",
+    city: "",
+    contact_number: "",
+    country: "",
+    description: "",
+    hotel_name: "",
+    latitude:40.7128,
+    licence_url: "",
+    longitude:  74.006,
+    rating:  4.6,
+    state_province: "",
+    website_url: "",
   }
 
 
 const Restauran = () => {
     const [user,setUser] = useState([])
     const [modul,setModul] = useState(false)
-    const [name,setName] =useState(links)
+    const [name,setName] =useState(intialstate)
     const[ count,setCount] = useState(0)
     const[ count1,setCount1] = useState([])  
     const [render,setrender] = useState(true)
@@ -69,8 +75,8 @@ let link = user?.filter((user) =>{
     || user.created_at.toLowerCase().includes(search.toLowerCase())
 })?.map((user)=>(
     <>
-    <tr key={user.restaurant_id} onClick={() => setModulAll(user) || setMenu(!menu)} >
-    <td>
+    <tr key={user.restaurant_id}  >
+    <td onClick={() => setModulAll(user) || setMenu(!menu)}>
             <div className="tr">
             <div className="tr_th">
                 {
@@ -84,10 +90,10 @@ let link = user?.filter((user) =>{
                 </div>
             </div>
             </td>
-        <td>{user.location.city}</td>
-        <td>{user.contact_number}</td>
-        <td>{user.restaurant_id}</td>
-        <td> {user.created_at} </td>
+        <td onClick={() => setModulAll(user) || setMenu(!menu)}>{user.location.city}</td>
+        <td onClick={() => setModulAll(user) || setMenu(!menu)}>{user.contact_number}</td>
+        <td onClick={() => setModulAll(user) || setMenu(!menu)}>{user.restaurant_id}</td>
+        <td onClick={() => setModulAll(user) || setMenu(!menu)}> {user.created_at} </td>
         <td>
             <div className="delet">
         <img src={rasm3} alt=""  onClick={() => setForm(user)} />
@@ -141,17 +147,18 @@ const deleteUser = (restaurant_id) =>{
 
 
 // table push//////////////////
-  const AddTable = (event) =>{
-    event.preventDefault()
-    setName(links)
+const AddTable = (event) => {
+    event.preventDefault();
     axios
-    .post('/restaurant',name)
-    .then(response => {
-        setrender(p => !p)
-        console.log(response);
-    })
-    .catch(arr => console.log(" >>>>>>>>>>" ,arr))
-  }
+        .post("/restaurant", name)
+        .then((response) => {
+            setrender((p) => !p);
+            console.log(response);
+            setName(intialstate);
+            setModul(false);
+        })
+        .catch((arr) => console.log(" >>>>>>>>>>", arr));
+};
 
     return (
         <div>
@@ -201,52 +208,124 @@ const deleteUser = (restaurant_id) =>{
                   <div className={`all ${modul ? "show" : "all"}`} onClick={() => setModul(false)}>
             
             </div>
-           
-           <div className={`modal ${modul ? "show" : "modal"}`}>
-             <div className="modal_row">
-                  <form action="" onSubmit={AddTable}>
-                  <label htmlFor="">FullName</label> <br />
-                  <input
-                  value={name.full_name}
-                  onChange={ e =>  setName(prev => ({...prev, full_name: e.target.value}))}
-                  type="text" /> <br />
-                  <label htmlFor="">Email</label> <br />
-                  <input
-                   value={name.email}
-                   onChange={ e =>  setName(prev => ({...prev, email: e.target.value}))}
-                   type="email" /> <br />
-                  <label htmlFor="">Password</label> <br />
-                  <input type="password" name="password"
-                   value={name.password}
-                   onChange={ e =>  setName(prev => ({...prev, password: e.target.value}))}
-                  /><br />
-                  <label htmlFor="">Phone number</label> <br />
-                  <input type="number"
-                   value={name.phone_number}
-                   onChange={ e =>  setName(prev => ({...prev, phone_number: e.target.value}))}
-                  /><br />
-                  <label htmlFor="">Gender</label> <br />
-                   <select name="" id="" 
-                   value={name.gender}
-                   onChange={ e =>  setName(prev => ({...prev, gender: e.target.value}))} 
-                   >
-                   <option value="male">male</option>
-                   <option value="female">female</option>
-                   </select> <br />
-                   <label htmlFor="">Date of birth</label> <br />
-                   <input type="date" 
-                    value={name.date_of_birth}
-                    onChange={ e =>  setName(prev => ({...prev, date_of_birth: e.target.value}))}
-                   /> <br />
-                  <label htmlFor="">card</label> <br />
-                  <input type="number" 
-                  value={name.card}
-                  onChange={ e =>  setName(prev => ({...prev, card: e.target.value}))}
-                  /> <br />
-                  <button>Submit</button>
-                  </form> 
-                 </div>          
-             </div>
+            <div className={`modal ${modul ? "show" : "modal"}`}>
+        <div className="modal_row">
+          <form action="" onSubmit={AddTable}>
+            <label htmlFor="">Contact Number </label> <br />
+            <input
+              value={name.contact_number}
+              onChange={e =>
+                setName(prev => ({ ...prev, contact_number: e.target.value }))
+              }
+              type="text"
+            />{" "}
+            <br />
+            <label htmlFor="">Description</label> <br />
+            <input
+              value={name.description}
+              onChange={e =>
+                setName(prev => ({ ...prev, description: e.target.value }))
+              }
+              type="text"
+            />{" "}
+            <br />
+            <label htmlFor=""> Hotel Name</label> <br />
+            <input
+              type="text"
+              value={name.hotel_name}
+              onChange={e =>
+                setName(prev => ({ ...prev, hotel_name: e.target.value }))
+              }
+            />
+            <br />
+            <label htmlFor="">Address</label> <br />
+            <input
+              type="text"
+              value={name.address}
+              onChange={e =>
+                setName(prev => ({ ...prev, address: e.target.value }))
+              }
+            />
+            <br />
+            <label htmlFor="">City</label> <br />
+            <input
+              type="text"
+              value={name.city}
+              onChange={e =>
+                setName(prev => ({ ...prev, city: e.target.value }))
+              }
+            />
+            <br />  
+
+            <label htmlFor="">Country</label> <br />
+            <input
+              type="text"
+              value={name.country}
+              onChange={e =>
+                setName(prev => ({ ...prev, country: e.target.value }))
+              }
+            />
+            <br />
+            <label htmlFor="">Latitude</label> <br />
+            <input
+              type="number"
+              value={name.latitude}
+              onChange={e =>
+                setName(prev => ({ ...prev, latitude: e.target.value }))
+              }
+            />{" "}
+            <br />
+            <label htmlFor="">Longitude</label> <br />
+            <input
+              type="number"
+              value={name.longitude}
+              onChange={e =>
+                setName(prev => ({ ...prev, longitude: e.target.value }))
+              }
+            />{" "}
+            <br />
+            <label htmlFor="">State Province</label> <br />
+            <input
+              type="text"
+              value={name.state_province}
+              onChange={e =>
+                setName(prev => ({ ...prev, state_province: e.target.value }))
+              }
+            />
+            <br />
+            <label htmlFor="">Rating</label> <br />
+            <input
+              value={name.rating}
+              onChange={e =>
+                setName(prev => ({ ...prev, rating: e.target.value }))
+              }
+              type="number"
+            />
+            <br />
+            <label htmlFor="">Website Url</label> <br />
+            <input
+              type="text"
+              value={name.website_url}
+              onChange={e =>
+                setName(prev => ({ ...prev, website_url: e.target.value }))
+              }
+            />
+            <br />
+
+            <label htmlFor="">Licence Url</label> <br />
+            <input
+              type="text"
+              value={name.licence_url}
+              onChange={e =>
+                setName(prev => ({ ...prev, licence_url: e.target.value }))
+              }
+            />
+            <br />
+            
+            <button>Submit</button>
+          </form>
+        </div>
+      </div>
  
          <section className='UserAdd'>
          <div className='container'>

@@ -5,11 +5,11 @@ const main_url= axios.create({
 })
 
 main_url.interceptors.request.use((req) => {
-    let token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc3NjYyNzIsImlhdCI6MTcxNzA0NjI3MiwiaXNzIjoiIiwicm9sZSI6InN1ZG8iLCJzdWIiOiIyZTljYTI3Ni01Nzk5LTRmMzQtYTBhNi05MzhmN2IwYTVjOGQifQ.2BANpQ3ZAPfb0G2P3VHkm4JjCsOTQIk5h8B2U0WJt9Y"
+    let token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg0ODczODQsImlhdCI6MTcxNzc2NzM4NCwiaXNzIjoiIiwicm9sZSI6InN1ZG8iLCJzdWIiOiIyZTljYTI3Ni01Nzk5LTRmMzQtYTBhNi05MzhmN2IwYTVjOGQifQ.AD1xKyrEGKhWmH8PlqCq36IWuJS73-6ZclrFQ2T6Obo"
 
     if (token) {
       req.headers.authorization = `Bearer ${token}`;
     }
-    return req;
+    return req;                                                                                                                        
   });
 export default main_url;
