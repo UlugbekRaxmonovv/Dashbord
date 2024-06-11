@@ -90,7 +90,7 @@ const Login = () => {
                 </div>
                 </div>
               </div>
-              <Link to={'/forget'} style={{color:'gray'}}>FogetPassword</Link>
+              <Link to={'/forget'} style={{color:'gray',fontSize:'15px',marginLeft:'-250px'}}>FogetPassword</Link>
               <div className="login_input_alt">
                 <button type="submit">{loading ? 'Loading....' : "SIGN IN"}</button>
               </div>

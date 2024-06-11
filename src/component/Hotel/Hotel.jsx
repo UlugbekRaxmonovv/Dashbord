@@ -164,6 +164,7 @@ const Hotel = () => {
               //   loop={true}
               className="mySwiper"
             >
+
               {modulall?.images?.map((el) => (
                 <SwiperSlide key={el.id}>
                   <div
