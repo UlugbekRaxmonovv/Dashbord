@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import './Attraction.css'
-import rasm1 from  '../../assets/img/funn.png'
 import rasm2 from '../../assets/img/delet.png'
 import rasm3 from '../../assets/img/pen 1.png'
 import { MdPeopleAlt } from "react-icons/md";
@@ -10,7 +9,10 @@ import rasm4 from  '../../assets/img/minu.png'
 import { CiSearch } from "react-icons/ci";
 import { VscBell } from "react-icons/vsc";
 import { VscChromeClose } from "react-icons/vsc";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation, Autoplay } from "swiper/modules";
 
 const intialstate = {
     address: "",
@@ -34,12 +36,14 @@ const Attraction = () => {
     const[ count,setCount] = useState(0)
     const[ count1,setCount1] = useState([])  
     const [render,setrender] = useState(true)
-    const [ediedForm,setEdiedForm] = useState([])
     const [img,setImg] = useState(false)
-    const [form,setForm] = useState(null)
+    const [form,setForm] = useState(false)
     const [search,setSearch] = useState('')
     const [modulall,setModulAll] = useState(null)
     const [menu, setMenu] = useState(false)
+    const [modulall1, setModulAll1] = useState(false);
+    const [file, setFile] = useState([]);
+    const [hotelId, stHotelId] = useState('');
 
      let javob = count1
      let javob1 = javob / 10 
@@ -96,17 +100,6 @@ let link = user?.filter((user) =>{
         </tr>
     </> ))
 
-
-
-// const getTable = (id) =>{
-//     axios
-//     .get(`/users/${id}`)
-//     .then(response => {
-//         setEdiedForm(response.data);
-//     })
-// }
-   
-
 // delete////////////////////////////
 const deleteUser = (id) =>{
      if(window.confirm('Are you sure you want to delete')){
@@ -119,23 +112,6 @@ const deleteUser = (id) =>{
 
     }
 
-// Length ///////////////////////
-    // useEffect(() =>{
-    //     axios
-    //     .get('/restaurant/list?page=1&limit=10')
-    //     .then((res) =>{
-    //         setCount1(res.data.count);
-    //     })
-
-    // },[])
-
-
-
-
-
-
-
-
 // table push//////////////////
 const AddTable = (event) => {
     event.preventDefault();
@@ -145,10 +121,47 @@ const AddTable = (event) => {
             setrender((p) => !p);
             console.log(response);
             setName(intialstate);
+            stHotelId(response.data.attraction_id);
             setModul(false);
+            setModulAll1(!modulall1)
         })
         .catch((arr) => console.log(" >>>>>>>>>>", arr));
 };
+
+
+const handleFileUpload = async (event) => {
+  event.preventDefault();
+  
+  if (!file) {
+    console.log("Fayl yuq");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", file[0]); 
+
+  try {
+    const response = await axios.post(`https://tour.touristan-bs.uz/v1/media/establishment/${hotelId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    console.log(response);
+    setrender((prev) => !prev);
+    setFile([]);
+  } catch (error) {
+    console.error("Fayl xato?", error);
+  }
+};
+
+
+
+
+const handelRemovImg = (inx) => {
+  setFile((prev) => [...prev].filter((_,i) =>  i !== inx ))
+}
+
 
     return (
         <div>
@@ -184,7 +197,31 @@ const AddTable = (event) => {
           <div className="resturan_All">
             <VscChromeClose onClick={() => setMenu(!menu)} />
             <div className="resturan_row">
+            <Swiper
+              navigation={true}
+              modules={[Navigation, Autoplay]}
+              //   autoplay={{
+              //     delay: 2500,
+              //     disableOnInteraction: false,
+              //   }}
+              //   loop={true}
+              className="mySwiper"
+            >
 
+              {modulall?.images?.map((el) => (
+                <SwiperSlide key={el.id}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img width={100} src={el.image_url} alt="rasm" />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
                 <p title={modulall?.id}><span>Id :</span>{modulall?.attraction_id}</p>
                 <p><span>Attraction Name: </span>{modulall?.attraction_name}</p>
                 <p><span>Contact Number: </span>{modulall?.contact_number}</p>
@@ -328,6 +365,33 @@ const AddTable = (event) => {
           </form>
         </div>
       </div>
+
+      <div
+        className={`alo ${modulall1 ? "low1" : "alo"}`}
+        onClick={() => setModulAll1(false)}
+      ></div>
+<div className={`low ${modulall1 ? "low1" : "low"}`}>
+<form onSubmit={handleFileUpload}>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files)}
+          />
+           <br />
+           <div className='local_imgs'>
+             {
+Object.values(file)?.map((img,inx) =>(
+    <div key={inx} className='local_img' >
+      <img  src={URL.createObjectURL(img)} alt="" width='100px' height='100px' />
+        <VscChromeClose onClick={() => handelRemovImg(inx)} />
+        </div>
+))
+  }
+        </div>
+          <button>Upload</button>
+        </form>
+</div>
 
 <section className='UserAdd'>
 <div className='container'>

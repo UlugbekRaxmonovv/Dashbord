@@ -6,7 +6,6 @@
 
 
 
-
   .form__alll{
     display: none;
     position: absolute;
@@ -61,3 +60,75 @@
 .swipir .swiper-button-prev::after{
     display: none;
 } */
+
+
+.alo{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(1px);
+  display: none;
+
+}
+.alo.low1{
+  display: block;
+}
+
+.low{
+  display: none;
+  max-width: 400px;
+  width: 100%;
+  padding: 20px 0;
+  box-shadow: 2px 2px 8px 2px gray;
+  border-radius: 8px;
+  overflow: hidden;
+  height:  350px;
+  overflow-y: auto;
+  
+ }
+ 
+ @media (min-width: 1200px) {
+  .low::-webkit-scrollbar {
+      width: 6px;
+  }
+   .low::-webkit-scrollbar-thumb {
+        background: orange;
+        border-radius: 8px;
+      }
+    }
+
+ 
+
+ .low.low1{
+  display: block;
+  position: fixed ;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20000;
+  background-color: white;
+ }
+
+
+
+ .local_imgs{
+  display: flex;
+  align-items: center;
+  margin-left: -10%;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px 0;
+}
+.local_img{
+  position: relative;
+}
+.local_img svg{
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  transform: translate(-50%,-50%);
+  color:crimson;
+  
+}

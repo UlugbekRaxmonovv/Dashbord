@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../api";
-import { Navigate } from "react-router-dom";
 import { PiEyeFill } from "react-icons/pi";
 import { PiEyeSlashFill } from "react-icons/pi";
 
@@ -78,6 +77,7 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
+                  style={{backgroundColor:'#E8F0FE'}}
                   required
                 />
               </div>

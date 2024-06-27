@@ -103,6 +103,8 @@ form{
     border: 1px solid #E5E5E5;
     outline: none;
     padding: 10px 5px;  
+    background-color: #E8F0FE;
+    
 }
 .int {
     display: flex;

@@ -9,7 +9,10 @@ import rasm4 from  '../../assets/img/minu.png'
 import { CiSearch } from "react-icons/ci";
 import { VscBell } from "react-icons/vsc";
 import { VscChromeClose } from "react-icons/vsc";
-import UserPutForm from '../../component/UserAdd/UserPutForm/UserPutForm'
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation, Autoplay } from "swiper/modules";
 import './Restauran.css'
 
 
@@ -43,6 +46,9 @@ const Restauran = () => {
     const [search,setSearch] = useState('')
     const [modulall,setModulAll] = useState(null)
     const [menu, setMenu] = useState(false)
+    const [modulall1, setModulAll1] = useState(false);
+    const [file, setFile] = useState([]);
+    const [hotelId, stHotelId] = useState('');
 
     document.body.style.overflow =  menu ? "hidden" : "auto"
     document.body.style.overflow =  modul ? "hidden" : "auto"
@@ -154,11 +160,44 @@ const AddTable = (event) => {
         .then((response) => {
             setrender((p) => !p);
             console.log(response);
+            stHotelId(response.data.restaurant_id);
             setName(intialstate);
+            setModulAll1(!modulall1)
             setModul(false);
         })
         .catch((arr) => console.log(" >>>>>>>>>>", arr));
 };
+
+
+const handleFileUpload = async (event) => {
+  event.preventDefault();
+  
+  if (!file) {
+    console.log("No file selected");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", file[0]); 
+
+  try {
+    const response = await axios.post(`https://tour.touristan-bs.uz/v1/media/establishment/${hotelId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    console.log(response);
+    setrender((prev) => !prev);
+    setFile([]);
+  } catch (error) {
+    console.error("Error uploading file:", error);
+  }
+};
+
+const handelRemovImg = (inx) => {
+  setFile((prev) => [...prev].filter((_,i) =>  i !== inx ))
+}
 
     return (
         <div>
@@ -169,7 +208,31 @@ const AddTable = (event) => {
           <div className="resturan_All">
             <VscChromeClose onClick={() => setMenu(!menu)} />
             <div className="resturan_row">
-         
+            <Swiper
+              navigation={true}
+              modules={[Navigation, Autoplay]}
+              //   autoplay={{
+              //     delay: 2500,
+              //     disableOnInteraction: false,
+              //   }}
+              //   loop={true}
+              className="mySwiper"
+            >
+
+              {modulall?.images?.map((el) => (
+                <SwiperSlide key={el.id}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img width={100} src={el.image_url} alt="rasm" />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
                 <p><span>Restaurant Name: </span>{modulall?.restaurant_name}</p>
                 <p><span>Contact Number: </span>{modulall?.contact_number}</p>
                 <p><span>Description: </span>{modulall?.description}</p>
@@ -327,6 +390,33 @@ const AddTable = (event) => {
         </div>
       </div>
  
+
+      <div
+        className={`alo ${modulall1 ? "low1" : "alo"}`}
+        onClick={() => setModulAll1(false)}
+      ></div>
+<div className={`low ${modulall1 ? "low1" : "low"}`}>
+<form onSubmit={handleFileUpload}>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files)}
+          />
+           <br />
+           <div className='local_imgs'>
+             {
+Object.values(file)?.map((img,inx) =>(
+    <div key={inx} className='local_img' >
+      <img  src={URL.createObjectURL(img)} alt="" width='100px' height='100px' />
+        <VscChromeClose onClick={() => handelRemovImg(inx)} />
+        </div>
+))
+  }
+        </div>
+          <button>Upload</button>
+        </form>
+</div>
          <section className='UserAdd'>
          <div className='container'>
              <div className="UserAdd_i">

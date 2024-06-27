@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import rasm2 from "../../assets/img/delet.png";
 import rasm3 from "../../assets/img/pen 1.png";
 import { MdPeopleAlt } from "react-icons/md";
 import rasm4 from "../../assets/img/minu.png";
 import { CiSearch } from "react-icons/ci";
 import { VscBell } from "react-icons/vsc";
+import { VscChromeClose } from "react-icons/vsc";
 import axios from "../../api";
 import "./Hotel.css";
 import { Link } from "react-router-dom";
-import { VscChromeClose } from "react-icons/vsc";
+// import { VscChromeClose } from "react-icons/vsc";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
+export const ThemeContext = createContext(null)
+
 
 const intialstate = {
     address: "",
@@ -29,6 +32,8 @@ const intialstate = {
     website_url: "",
   }
 
+  console.log(intialstate);
+
 
 const Hotel = () => {
   const [user, setUser] = useState([]);
@@ -42,6 +47,9 @@ const Hotel = () => {
   const [search, setSearch] = useState("");
   const [menu, setMenu] = useState(false);
   const [modulall, setModulAll] = useState(null);
+  const [modulall1, setModulAll1] = useState(false);
+  const [file, setFile] = useState([]);
+  const [hotelId, stHotelId] = useState('');
 
   // scroll
   document.body.style.overflow = modul ? "hidden" : "auto";
@@ -79,11 +87,11 @@ const Hotel = () => {
           <td  onClick={() => setModulAll(user) || setMenu(!menu)}>
             <div className="tr">
               <div className="tr_th">
-                {img ? (
+                {img ? 
                   <img src={user?.profile_img} alt="img" />
-                ) : (
+                 : 
                   <MdPeopleAlt style={{ fontSize: "30px", color: "gray" }} />
-                )}
+                }
               </div>
               <div className="tr_th">{user.hotel_name}</div>
             </div>
@@ -105,13 +113,6 @@ const Hotel = () => {
       </>
     ));
 
-  // const getTable = (id) =>{
-  //     axios
-  //     .get(`/users/${id}`)
-  //     .then(response => {
-  //         setEdiedForm(response.data);
-  //     })
-  // }
 
   // delete////////////////////////////
   const deleteUser = (id) => {
@@ -140,11 +141,47 @@ const Hotel = () => {
         .then((response) => {
             setrender((p) => !p);
             console.log(response);
+            stHotelId(response.data.hotel_id);
+            setModul(false);  
             setName(intialstate);
-            setModul(false);
+            setModulAll1(!modulall1)
         })
         .catch((arr) => console.log(" >>>>>>>>>>", arr));
 };
+
+
+const handleFileUpload = async (event) => {
+  event.preventDefault();
+  
+  if (!file) {
+    console.log("No file selected");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", file[0]); 
+
+  try {
+    const response = await axios.post(`https://tour.touristan-bs.uz/v1/media/establishment/${hotelId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    console.log(response);
+    setrender((prev) => !prev);
+    setFile([]);
+  } catch (error) {
+    console.error("Error uploading file:", error);
+  }
+};
+
+
+
+
+const handelRemovImg = (inx) => {
+  setFile((prev) => [...prev].filter((_,i) =>  i !== inx ))
+}
 
   
 
@@ -389,6 +426,7 @@ const Hotel = () => {
 
             <label htmlFor="">Licence Url</label> <br />
             <input
+            required
               type="text"
               value={name.licence_url}
               onChange={e =>
@@ -396,11 +434,40 @@ const Hotel = () => {
               }
             />
             <br />
+           
+            <button type="submit">Next</button>
             
-            <button>Submit</button>
           </form>
         </div>
       </div>
+
+      <div
+        className={`alo ${modulall1 ? "low1" : "alo"}`}
+        onClick={() => setModulAll1(false)}
+      ></div>
+<div className={`low ${modulall1 ? "low1" : "low"}`}>
+<form onSubmit={handleFileUpload}>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files)}
+          />
+           <br />
+           <div className='local_imgs'>
+             {
+Object.values(file)?.map((img,inx) =>(
+    <div key={inx} className='local_img' >
+      <img  src={URL.createObjectURL(img)} alt="" width='100px' height='100px' />
+        <VscChromeClose onClick={() => handelRemovImg(inx)} />
+        </div>
+))
+  }
+        </div>
+          <button>Upload</button>
+        </form>
+</div>
+      
 
       <section className="UserAdd">
         <div className="container">

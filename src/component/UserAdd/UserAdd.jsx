@@ -12,6 +12,7 @@ import { CiSearch } from "react-icons/ci";
 import { VscBell } from "react-icons/vsc";
 import { VscChromeClose } from "react-icons/vsc";
 import { toast } from 'react-toastify';
+import { PatternFormat } from 'react-number-format';
 
 const links ={
     full_name:"",
@@ -220,24 +221,28 @@ const deleteUser = (id) =>{
                  <form action="" onSubmit={AddTable}>
                  <label htmlFor="">FullName</label> <br />
                  <input
+                 placeholder='FullName'
                  value={name.full_name}
                  onChange={ e =>  setName(prev => ({...prev, full_name: e.target.value}))}
                  type="text" /> <br />
                  <label htmlFor="">Email</label> <br />
                  <input
                   value={name.email}
+                placeholder='Email'
                   onChange={ e =>  setName(prev => ({...prev, email: e.target.value}))}
                   type="email" /> <br />
                  <label htmlFor="">Password</label> <br />
                  <input type="password" name="password"
+                 placeholder='Password'
                   value={name.password}
                   onChange={ e =>  setName(prev => ({...prev, password: e.target.value}))}
                  /><br />
                  <label htmlFor="">Phone number</label> <br />
-                 <input type="number"
-                  value={name.phone_number}
-                  onChange={ e =>  setName(prev => ({...prev, phone_number: e.target.value}))}
-                 /><br />
+                 <PatternFormat   value={name.phone_number}
+                 placeholder='Phone number'
+                   onChange={ e =>  setName(prev => ({...prev, phone_number: e.target.value}))}
+                 format="+998 (##) ### ## ##" allowEmptyFormatting mask="_" />;
+                  <br />
                  <label htmlFor="">Gender</label> <br />
                   <select name="" id="" 
                   value={name.gender}
@@ -248,11 +253,13 @@ const deleteUser = (id) =>{
                   </select> <br />
                   <label htmlFor="">Date of birth</label> <br />
                   <input type="date" 
+                  placeholder='Date of birth'
                    value={name.date_of_birth}
                    onChange={ e =>  setName(prev => ({...prev, date_of_birth: e.target.value}))}
                   /> <br />
                  <label htmlFor="">card</label> <br />
                  <input type="number" 
+                 placeholder='card'
                  value={name.card}
                  onChange={ e =>  setName(prev => ({...prev, card: e.target.value}))}
                  /> <br />
